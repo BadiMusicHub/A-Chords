@@ -1,0 +1,477 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255,255,255,0.04),
+            rgba(18,20,23,0.95) 45%
+        ),
+        linear-gradient(
+            180deg,
+            #0f1114,
+            #121417
+        );
+
+    color: #f1f1f1;
+}
+
+/* =========================================================
+   PANTALLAS · BASE LIMPIA
+========================================================= */
+
+.screen {
+    display: none;
+    min-height: 100vh;
+}
+
+.screen.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor central único */
+.screen-content {
+    width: 100%;
+    max-width: 640px;
+    padding: 28px 20px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* =========================================================
+   TIPOGRAFÍA
+========================================================= */
+
+h1 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 28px 0 16px;
+}
+
+p {
+    font-size: 16px;
+    opacity: 0.85;
+    margin-bottom: 16px;
+}
+
+/* =========================================================
+   BOTONES · PRO
+========================================================= */
+
+button {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+
+    background: linear-gradient(
+        180deg,
+        #262c35,
+        #1f242b
+    );
+
+    color: #f1f1f1;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 26px;
+    cursor: pointer;
+
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 6px 14px rgba(0,0,0,0.35);
+
+    transition:
+        transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:hover {
+    background: linear-gradient(
+        180deg,
+        #2c3340,
+        #242b36
+    );
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button.selected {
+    background: linear-gradient(
+        180deg,
+        #3ccf9a,
+        #2fa37a
+    );
+    color: #0f1a14;
+    font-weight: 700;
+}
+
+/* Grupos */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
+
+#top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+#timer {
+    font-size: 18px;
+    opacity: 0.8;
+    font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   ÁREA DE JUEGO
+========================================================= */
+
+#game-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0)
+    );
+
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+#game-area-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* =========================================================
+   GUÍA DE GRADOS
+========================================================= */
+
+#degree-labels {
+    display: grid;
+    gap: 14px;
+    justify-items: end;
+}
+
+.degree-label {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+/* =========================================================
+   TABLERO
+========================================================= */
+
+#board {
+    display: grid;
+    gap: 14px;
+}
+
+.cell {
+    width: 64px;
+    height: 64px;
+    background-color: #1a1f26;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cell.active {
+    box-shadow: 0 0 0 2px #2fa37a;
+    transform: scale(1.04);
+}
+
+.cell.fixed {
+    background-color: #2a3038;
+    opacity: 0.85;
+}
+
+.cell.correct {
+    background-color: #2fa37a;
+    color: #0f1a14;
+}
+
+.cell.error {
+    background-color: #7a2f2f;
+    color: #fff;
+}
+
+/* =========================================================
+   PALETA DE NOTAS
+========================================================= */
+
+#note-palette {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto 16px;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.palette-note {
+    background-color: #1f242b;
+    border-radius: 10px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0.85;
+    cursor: pointer;
+
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background-color 0.12s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.palette-note:hover {
+    background-color: #262c35;
+}
+
+.palette-note:active {
+    transform: scale(0.94);
+}
+
+/* =========================================================
+   PANTALLA FINAL
+========================================================= */
+
+#screen-final h2 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+#final-time {
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-variant-numeric: tabular-nums;
+}
+
+#final-title.animate {
+    animation: perfectBounce 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes perfectBounce {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+#final-title .check-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 110px;
+    opacity: 0.14;
+    color: #2fa37a;
+    pointer-events: none;
+}
+
+/* =========================================================
+   RESPONSIVE · MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+    h1 { font-size: 36px; }
+    h2 { font-size: 22px; }
+
+    .cell {
+        width: 52px;
+        height: 52px;
+        font-size: 20px;
+    }
+
+    #board {
+        gap: 10px;
+    }
+
+    #note-palette {
+        gap: 8px;
+    }
+
+    .palette-note {
+        height: 42px;
+        font-size: 18px;
+    }
+
+    #btn-validate {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   PALETA + TABLERO · COLOR POR ALTERACIÓN
+========================================================= */
+
+/* letra base (naturales) */
+.note-letter {
+    color: #e9ecef;
+}
+
+/* sostenido o bemol */
+.note-accidental.accidental-1 {
+    color: rgba(233, 236, 239, 0.7);
+}
+
+/* doble sostenido / doble bemol */
+.note-accidental.accidental-2 {
+    color: rgba(233, 236, 239, 0.45);
+}
+
+/* alineación perfecta */
+.note-letter,
+.note-accidental {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   PALETA · ALTERACIONES (A + B FINAL)
+========================================================= */
+
+/* NATURALES */
+.palette-note.natural {
+    background-color: #1f242b;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.04) inset,
+        0 4px 10px rgba(0,0,0,0.35);
+}
+
+/* 1 ALTERACIÓN (# / ♭) */
+.palette-note.accidental-1 {
+    background-color: #26383d; /* leve verde */
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 6px 14px rgba(0,0,0,0.38);
+}
+
+/* 2 ALTERACIONES (## / ♭♭) */
+.palette-note.accidental-2 {
+    background-color: #31484e; /* más presente */
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.08) inset,
+        0 8px 18px rgba(0,0,0,0.42);
+}
+
+/* HOVER (PC) */
+.palette-note:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+
+/* TAP (MÓVIL) */
+.palette-note:active {
+    transform: scale(0.94);
+    box-shadow:
+        0 3px 8px rgba(0,0,0,0.35) inset;
+}
+
+/* =========================
+   TABLERO · PRESENCIA VISUAL
+========================= */
+
+#game-area {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.01)
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.55),
+        0 1px 0 rgba(255,255,255,0.06) inset;
+
+    border-radius: 22px;
+}
